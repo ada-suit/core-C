@@ -1,0 +1,10 @@
+[Unit]
+Description=wavelink Pulse
+
+[Service]
+ExecStart=/home/karsh/pulse/wavelinkPulse
+User=wlp
+Group=wlp
+
+[Install]
+WantedBy=default.target
