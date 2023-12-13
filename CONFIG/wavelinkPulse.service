@@ -2,7 +2,7 @@
 Description=wavelink Pulse
 
 [Service]
-ExecStart=/home/karsh/pulse/wavelinkPulse
+ExecStart=/home/$USER/pulse/wavelinkPulse
 User=wlp
 Group=wlp
 
