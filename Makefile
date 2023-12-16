@@ -1,15 +1,34 @@
-# Makefile for cross-compiling for ARM Cortex-A53 using aarch64-linux-gnu-gcc
+# Makefile for cross and self compiling
 
-CC = aarch64-linux-gnu-gcc
+CC = gcc
+CROSS_CC = aarch64-linux-gnu-gcc
 CFLAGS = -Wall -O2
 
 TARGET = wavelinkPulse
 SRC_FILES = src/main.c
+OBJ_FILES = $(SRC_FILES:.c=.o)
 
 all: $(TARGET)
 
-$(TARGET): $(SRC_FILES)
+# Compile on ARM for ARM
+self: CC := $(CC)
+self: $(TARGET)
+
+$(TARGET): $(OBJ_FILES)
 	$(CC) $(CFLAGS) -o $@ $^
 
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+# Compile on x86 for ARM
+cross: CC := $(CROSS_CC)
+cross: $(TARGET)
+
+$(TARGET): $(OBJ_FILES)
+	$(CC) $(CFLAGS) -o $@ $^
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
 clean:
-	rm -f $(TARGET)
+	rm -f $(TARGET) $(OBJ_FILES)
