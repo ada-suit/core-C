@@ -3,6 +3,7 @@
 CC = gcc
 CROSS_CC = aarch64-linux-gnu-gcc
 CFLAGS = -Wall -O2
+LDFLAGS = -lgpiod
 
 TARGET = wavelinkPulse
 SRC_FILES = src/main.c
@@ -15,7 +16,7 @@ self: CC := $(CC)
 self: $(TARGET)
 
 $(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -25,7 +26,7 @@ cross: CC := $(CROSS_CC)
 cross: $(TARGET)
 
 $(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $@ $^
+	$(CC) $(CFLAGS) $(LDFLAGS) -o $@ $^
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c $< -o $@
