@@ -39,7 +39,7 @@ int line_init(struct gpiod_line **line, struct gpiod_chip *chip, char *label, in
             break;
 
         default:
-            fprintf("Invalid mode: %c\n", mode);
+            printf("Invalid mode\n");
             gpiod_line_release(*line);
             gpiod_chip_close(chip);
             return 1;

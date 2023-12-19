@@ -2,6 +2,7 @@
 #define SETUP_H
 
 #include <gpiod.h>
+#include <stdio.h>
 
 #define GPIO_CHIP_NAME "gpiochip0"
 
