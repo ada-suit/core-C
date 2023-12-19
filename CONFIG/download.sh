@@ -10,5 +10,5 @@ make clean
 make self
 
 # run the program
-./wavelinkPulse
+sudo -u wlp ./wavelinkPulse
 
