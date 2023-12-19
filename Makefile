@@ -8,7 +8,7 @@ LDFLAGS = -lgpiod
 TARGET = bin
 SRC_DIR = src
 SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
-OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=%.o)
+OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(SRC_DIR)/%.o)
 
 all: $(TARGET)
 
@@ -21,7 +21,7 @@ cross: $(TARGET)
 $(TARGET): $(OBJ_FILES)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-%.o: $(SRC_DIR)/%.c
+$(SRC_DIR)/%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
