@@ -5,30 +5,23 @@ CROSS_CC = aarch64-linux-gnu-gcc
 CFLAGS = -Wall -O2
 LDFLAGS = -lgpiod
 
-TARGET = adabin
-SRC_FILES = src/main.c
-OBJ_FILES = $(SRC_FILES:.c=.o)
+TARGET = bin
+SRC_DIR = src
+SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
+OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=%.o)
 
 all: $(TARGET)
 
-# Compile on ARM for ARM
 self: CC := $(CC)
 self: $(TARGET)
 
-$(TARGET): $(OBJ_FILES)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
-
-%.o: %.c
-	$(CC) $(CFLAGS) -c $< -o $@
-
-# Compile on x86 for ARM
 cross: CC := $(CROSS_CC)
 cross: $(TARGET)
 
 $(TARGET): $(OBJ_FILES)
 	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
 
-%.o: %.c
+%.o: $(SRC_DIR)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
