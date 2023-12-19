@@ -5,7 +5,7 @@ CROSS_CC = aarch64-linux-gnu-gcc
 CFLAGS = -Wall -O2
 LDFLAGS = -lgpiod
 
-TARGET = wavelinkPulse
+TARGET = adabin
 SRC_FILES = src/main.c
 OBJ_FILES = $(SRC_FILES:.c=.o)
 

@@ -1,17 +1,17 @@
 #!/usr/bin/env bash
 
 # Directory Structure
-mkdir ~/pulse
-cd ~/pulse
+mkdir ~/arasrc
+cd ~/arasrc
 mkdir logs src saves lib
 
 # download.sh script
-sudo curl -o ./download.sh https://raw.githubusercontent.com/karshPrime/wavelinkPulse/main/CONFIG/download.sh
+sudo curl -o ./download.sh https://raw.githubusercontent.com/karshPrime/ada/main/CONFIG/download.sh
 chmod +x ./download.sh
 
 # Get Service file
-sudo curl -o /etc/systemd/system/wavelinkPulse.service https://raw.githubusercontent.com/karshPrime/wavelinkPulse/main/CONFIG/wavelinkPulse.service
+sudo curl -o /etc/systemd/system/adad.service https://raw.githubusercontent.com/karshPrime/ada/main/CONFIG/adad.service
 
 # Start and enable the service file
-sudo systemctl enable wavelinkPulse.service
-sudo systemctl start wavelinkPulse.service
+sudo systemctl enable adad.service
+sudo systemctl start adad.service

@@ -1,0 +1,10 @@
+[Unit]
+Description=ada daemon
+
+[Service]
+ExecStart=/home/$USER/adasrc/bin
+User=ada
+Group=ada
+
+[Install]
+WantedBy=default.target

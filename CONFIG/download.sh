@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 # change directories
-cd ~/pulse/
+cd ~/adasrc/
 
 # clear old builds
 make clean
@@ -10,5 +10,4 @@ make clean
 make self
 
 # run the program
-sudo -u wlp ./wavelinkPulse
-
+sudo -u ada ./bin
