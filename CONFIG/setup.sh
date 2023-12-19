@@ -15,3 +15,6 @@ sudo curl -o /etc/systemd/system/adad.service https://raw.githubusercontent.com/
 # Start and enable the service file
 sudo systemctl enable adad.service
 sudo systemctl start adad.service
+
+# Dependencies
+sudo apt install gpiod libgpiod-dev
