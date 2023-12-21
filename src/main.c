@@ -1,6 +1,4 @@
-#include <stdio.h>
-#include <gpiod.h>
-#include "sysinfo.h"
+#include "main.h"
 
 int main() {
     struct gpiod_chip *chip;
