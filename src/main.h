@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <gpiod.h>
 #include <unistd.h>
+#include <time.h>
 
 #include "setup.h"
 #include "sysinfo.h"
