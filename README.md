@@ -1,8 +1,8 @@
-# Adaptive Device Assistant (A.D.A.)
+# Adaptive Digital Assistant (A.D.A.)
 
 ## Overview
 
-The Adaptive Device Assistant (A.D.A.) is a Raspberry Pi-based project focused on system programming, GPIO interfacing, and remote communication. The project aims to create a flexible and intelligent device that can adapt to different scenarios through the use of sensors, buttons, LEDs, and remote control mechanisms.
+The Adaptive Digital Assistant (A.D.A.) is a Raspberry Pi-based project focused on system programming, GPIO interfacing, and remote communication. The project aims to create a flexible and intelligent device that can adapt to different scenarios through the use of sensors, buttons, LEDs, and remote control mechanisms.
 
 ## Features 
 
@@ -26,7 +26,6 @@ The Adaptive Device Assistant (A.D.A.) is a Raspberry Pi-based project focused o
 To simplify the installation process, a [setup script](./CONFIG/setup.sh) is provided, that configures the Raspberry Pi in accordance to this project's needs. This script takes care of all dependencies, systemd services and system users.
 
 Additional instructions on setting up the Raspberry Pi can be found [here](./CONFIG/README.md).
-
 
 
 ## Project Progress
