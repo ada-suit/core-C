@@ -6,6 +6,9 @@ int main() {
     struct gpiod_chip *chip;
     chip_init(&chip);
 
+    struct gpiod_line *buzzer;
+    line_init(&buzzer, chip, "buzzer", 17, 'o');
+
     struct gpiod_line *led_power;
     line_init(&led_power, chip, "power stability", 26, 'o');
 
@@ -20,6 +23,7 @@ int main() {
 
     // Release resources
     gpiod_line_release(led_power);
+    gpiod_line_release(buzzer);
     gpiod_chip_close(chip);
 
     return 0;

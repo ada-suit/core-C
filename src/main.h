@@ -7,6 +7,7 @@
 #include <time.h>
 
 #include "setup.h"
+#include "inform.h"
 #include "sysinfo.h"
 
 #endif
