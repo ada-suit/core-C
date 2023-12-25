@@ -1,6 +1,7 @@
 #include "main.h"
 
-int main() {
+int main() 
+{
     struct Counter counter = {0, 1};
     time_t time_now, time_last;
     time(&time_last);
@@ -17,7 +18,7 @@ int main() {
     int stop = 0;
     while (!stop) {
         // trigger every 5 minutes
-        if (counter.value % 300 == 0 && counter.flag) {
+        if (counter.value % FIVE_MIN == 0 && counter.flag) {
             gpiod_line_set_value(led_power, power_stable());
         }
 
@@ -33,7 +34,9 @@ int main() {
     return 0;
 }
 
-void counter_update(time_t *ntime, time_t *ltime, struct Counter *counter) {
+// increment counter with time
+void counter_update(time_t *ntime, time_t *ltime, struct Counter *counter) 
+{
     time(ntime);
 
     if (*ntime == *ltime) {

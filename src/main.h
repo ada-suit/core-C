@@ -10,6 +10,8 @@
 #include "inform.h"
 #include "sysinfo.h"
 
+#define FIVE_MIN 300
+
 struct Counter {
     int value;
     bool flag;
