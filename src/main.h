@@ -12,6 +12,10 @@
 
 #define FIVE_MIN 300
 
+#define LED 0
+#define BUT 1
+#define BUZ 2
+
 struct Counter {
     int value;
     bool flag;

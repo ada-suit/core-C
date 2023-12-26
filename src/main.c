@@ -11,27 +11,28 @@ int main()
     struct gpiod_chip *chip;
     chip_init(&chip);
 
-    struct gpiod_line *buzzer;
-    line_init(&buzzer, chip, "buzzer", 17, 'o');
+    // initialising all components
+    struct gpiod_line *leds[component_total(LED)];
+    leds_init(leds, chip);
 
-    struct gpiod_line *led_power;
-    line_init(&led_power, chip, "power stability", 26, 'o');
+    struct gpiod_line *buzzers[component_total(BUZ)];
+    buzzers_init(buzzers, chip);
 
-    struct gpiod_line *b_terminate;
-    line_init(&b_terminate, chip, "terminate button", 24, 'i');
-    
+    struct Button buttons[component_total(BUT)];
+    buttons_init(buttons, chip);
+
     // main loop; runs forever unless requested to stop
     while (1) {
         // trigger every 5 minutes
         if (counter.value % FIVE_MIN == 0 && counter.flag) {
-            gpiod_line_set_value(led_power, power_stable());
+            gpiod_line_set_value(leds[0], power_stable());
         }
 
-        int v_terminate = gpiod_line_get_value(b_terminate);
-        if (v_terminate < 1) {
-            printf("%d\n", v_terminate);
-            break;
-        }
+        //int v_terminate = gpiod_line_get_value(b_terminate);
+        //if (v_terminate < 1) {
+        //    printf("%d\n", v_terminate);
+        //    break;
+        //}
 
         // update the counter
         counter_update(&time_now, &time_last, &counter);

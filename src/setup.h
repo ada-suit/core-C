@@ -5,8 +5,23 @@
 #include <stdio.h>
 
 #define GPIO_CHIP_NAME "gpiochip0"
+#define OUTPUT 0
+#define INPUT  1
 
+struct Ports {
+    char name[8];
+    int pin;
+};
+
+struct Button {
+    struct gpiod_line *call;
+    int value;
+};
+
+int component_total(int index);
 int chip_init(struct gpiod_chip **chip);
-int line_init(struct gpiod_line **line, struct gpiod_chip *chip, char *label, int pin, char mode);
+int leds_init(struct gpiod_line *leds[], struct gpiod_chip *chip);
+int buttons_init(struct Button *buttons, struct gpiod_chip *chip);
+int buzzers_init(struct gpiod_line *buzzers[], struct gpiod_chip *chip);
 
 #endif
