@@ -106,3 +106,20 @@ int buzzers_init(struct gpiod_line *buzzers[], struct gpiod_chip *chip)
     }
     return 0;
 }
+
+void clean_resources(struct gpiod_line *leds[], struct Button *buttons, struct gpiod_line *buzzers[])
+{
+    int i = 0;
+
+    for (i = 0; i < component_total(0); i++) {
+        gpiod_line_release(leds[i]);
+    }
+
+    for (i = 0; i < component_total(1); i++) {
+        gpiod_line_release(buttons[i].call);
+    }
+
+    for (i = 0; i < component_total(2); i++) {
+        gpiod_line_release(buzzers[i]);
+    }
+}

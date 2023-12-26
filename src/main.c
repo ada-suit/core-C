@@ -38,9 +38,8 @@ int main()
         counter_update(&time_now, &time_last, &counter);
     }
 
-    gpiod_line_release(led_power);
-    gpiod_line_release(buzzer);
     // release resources
+    clean_resources(leds, buttons, buzzers);
     gpiod_chip_close(chip);
 
     return 0;

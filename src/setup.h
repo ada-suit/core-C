@@ -23,5 +23,6 @@ int chip_init(struct gpiod_chip **chip);
 int leds_init(struct gpiod_line *leds[], struct gpiod_chip *chip);
 int buttons_init(struct Button *buttons, struct gpiod_chip *chip);
 int buzzers_init(struct gpiod_line *buzzers[], struct gpiod_chip *chip);
+void clean_resources(struct gpiod_line *leds[], struct Button *buttons, struct gpiod_line *buzzers[]);
 
 #endif
