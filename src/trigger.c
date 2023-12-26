@@ -1,6 +1,6 @@
-#include "update.h"
+#include "trigger.h"
 
-void button_call(int *id, int *shift)
+void button_call(int *id, bool *shift, bool *run)
 {
     int condition = (*id * 10) + *shift;  // id
     switch (condition) {
@@ -22,16 +22,16 @@ void button_call(int *id, int *shift)
     }
 }
 
-void button_value_update(struct Button *buttons, bool *run, bool *shift, int *count, int *counter)
+void button_value_update(struct Button *buttons, bool *run, bool *shift, int *count, uint *counter)
 {
     int i = 0;
     for (i = 0; i < *count; i++) {
-        if (button.pause == 0) {
-            int value = gpiod_line_get_value(button.call);
+        if (buttons[i].sleep == 0) {
+            int value = gpiod_line_get_value(buttons->call);
 
             if (value < 1) {
-                button.sleep = *counter + 1; // one second delay 
-                button_call(&i, shift);
+                buttons[i].sleep = *counter + 1; // one second delay 
+                button_call(&i, shift, run);
             }
         }
     }
