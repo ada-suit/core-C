@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
 # copy files
+echo -e "Upload\n==============="
 scp -r ./src/* core3b+:~/adasrc/src/.
 scp -r ./lib/* core3b+:~/adasrc/lib/.
 
