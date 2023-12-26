@@ -45,6 +45,9 @@ int main()
         counter_update(&time_now, &time_last, &counter);
     }
 
+    // turn off all LEDs
+    led_call_off(leds, component_total(LED));
+
     // release resources
     clean_resources(leds, buttons, buzzers);
     gpiod_chip_close(chip);

@@ -6,6 +6,7 @@ void button_call(int *id, bool *shift, bool *run)
     switch (condition) {
         case 0:  // 00 = button 0 & toggle shift off
             *run = false;
+            printf("terminating...\n");
             break;
 
         case 1:  // 01 = button 0 & toggle shift on
@@ -58,5 +59,13 @@ void counter_update(time_t *ntime, time_t *ltime, struct Counter *counter)
         *ltime = *ntime;
         counter->value++;
         counter->flag = 1;
+    }
+}
+
+void led_call_off(struct gpiod_line *leds[], int count)
+{
+    int i = 0;
+    for (i = 0; i < count; i++) {
+        gpiod_line_set_value(leds[i], 0);
     }
 }
