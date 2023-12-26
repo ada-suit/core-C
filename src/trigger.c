@@ -37,6 +37,16 @@ void button_value_update(struct Button *buttons, bool *run, bool *shift, int *co
     }
 }
 
+void button_state_update(struct Button *buttons, int *count, uint *counter)
+{
+    int i = 0;
+    for (i = 0; i < *count; i++) {
+        if (buttons[i].sleep <= *counter) {
+            buttons[i].sleep = 0;
+        }
+    }
+}
+
 // increment counter with time (seconds)
 void counter_update(time_t *ntime, time_t *ltime, struct Counter *counter) 
 {
