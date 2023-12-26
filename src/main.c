@@ -18,15 +18,21 @@ int main()
     struct gpiod_line *buzzers[component_total(BUZ)];
     buzzers_init(buzzers, chip);
 
-    struct Button buttons[component_total(BUT)];
+    int button_count = component_total(BUT);      // [1]
+    struct Button buttons[button_count];
     buttons_init(buttons, chip);
 
-    // main loop; runs forever unless requested to stop
-    while (1) {
+    bool button_shift = false; // toggle shift state [2]
+
+    // main loop; runs forever unless requested to not run
+    bool run = true;
+    while (run) {
         // trigger every 5 minutes
         if (counter.value % FIVE_MIN == 0 && counter.flag) {
             gpiod_line_set_value(leds[0], power_stable());
         }
+        
+        button_value_update(buttons, &run, &button_shift, &button_count, &counter);
 
         //int v_terminate = gpiod_line_get_value(b_terminate);
         //if (v_terminate < 1) {

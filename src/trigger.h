@@ -12,6 +12,7 @@ struct Counter {
     bool flag;
 };
 
+void button_value_update(struct Button *buttons, bool *run, bool *shift, int *count);
 void counter_update(time_t *ntime, time_t *ltime, struct Counter *counter);
 
 #endif

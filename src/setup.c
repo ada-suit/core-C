@@ -2,7 +2,8 @@
 
 struct Ports leds_info[] = {
     {"power"  , 26},
-    {"network", 21}
+    {"network", 21},
+    {"shift",   23}
 };
 
 struct Ports buttons_info[] = {
@@ -92,7 +93,7 @@ int buttons_init(struct Button *buttons, struct gpiod_chip *chip)
     int i = 0;
     for (i = 0; i < size; i++) {
         line_init(&buttons[i].call, chip, &buttons_info[i], INPUT);
-        buttons[i].value = 1; // initial value for all buttons
+        buttons[i].sleep = 0; // by default buttons aren't on cooldown
     }
     return 0;
 }
