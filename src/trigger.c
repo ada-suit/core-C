@@ -1,5 +1,6 @@
 #include "trigger.h"
 
+// trigger different actions depending on button pressed
 void button_call(int *id, bool *shift, bool *run)
 {
     int condition = (*id * 10) + *shift;  // id
@@ -23,6 +24,7 @@ void button_call(int *id, bool *shift, bool *run)
     }
 }
 
+// check if a button has been pressed
 void button_value_update(struct Button *buttons, bool *run, bool *shift, int *count, uint *counter)
 {
     int i = 0;
@@ -38,6 +40,7 @@ void button_value_update(struct Button *buttons, bool *run, bool *shift, int *co
     }
 }
 
+// manage button debounce
 void button_state_update(struct Button *buttons, int *count, uint *counter)
 {
     int i = 0;
@@ -62,6 +65,7 @@ void counter_update(time_t *ntime, time_t *ltime, struct Counter *counter)
     }
 }
 
+// turn off all LEDs
 void led_call_off(struct gpiod_line *leds[], int count)
 {
     int i = 0;

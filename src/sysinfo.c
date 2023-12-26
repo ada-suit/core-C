@@ -1,5 +1,6 @@
 #include "sysinfo.h"
 
+// run shell commands to process their output
 int run_command(const char *command, char *buffer, short buffer_size)
 {
     FILE *cmd_output = popen(command, "r");
@@ -22,6 +23,7 @@ int run_command(const char *command, char *buffer, short buffer_size)
     return 0;
 }
 
+// check if power is indeed stable (throttled=0x0)
 int power_stable()
 {
     short buffer_size = 17;

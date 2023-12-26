@@ -32,14 +32,9 @@ int main()
             gpiod_line_set_value(leds[0], power_stable());
         }
         
+
         button_state_update(buttons, &button_count, &counter.value);
         button_value_update(buttons, &run, &button_shift, &button_count, &counter.value);
-
-        //int v_terminate = gpiod_line_get_value(b_terminate);
-        //if (v_terminate < 1) {
-        //    printf("%d\n", v_terminate);
-        //    break;
-        //}
 
         // update the counter
         counter_update(&time_now, &time_last, &counter);

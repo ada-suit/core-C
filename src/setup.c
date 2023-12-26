@@ -14,10 +14,11 @@ struct Ports buzzers_info[] = {
     {"all"    , 17} // only buzzer I am using
 };
 
-int component_total(int index)
+// get total number of each component
+int component_total(int component)
 {
     int size;
-    switch(index) {
+    switch(component) {
         case 0: // LEDS
             size = sizeof(leds_info) / sizeof(leds_info[0]);
             break;
@@ -38,6 +39,7 @@ int component_total(int index)
     return size;
 }
 
+// initialise the gpio chip
 int chip_init(struct gpiod_chip **chip)
 {
     *chip = gpiod_chip_open_by_name(GPIO_CHIP_NAME);
@@ -48,6 +50,7 @@ int chip_init(struct gpiod_chip **chip)
     return 0;
 }
 
+// initalise lines and configure them for input/output
 int line_init(struct gpiod_line **line, struct gpiod_chip *chip, struct Ports *port, bool mode)
 {
     *line = gpiod_chip_get_line(chip, port->pin);
@@ -77,6 +80,7 @@ int line_init(struct gpiod_line **line, struct gpiod_chip *chip, struct Ports *p
     return 0;
 }
 
+// initialise LED array with LED output lines
 int leds_init(struct gpiod_line *leds[], struct gpiod_chip *chip)
 {
     int size = component_total(0);
@@ -87,6 +91,7 @@ int leds_init(struct gpiod_line *leds[], struct gpiod_chip *chip)
     return 0;
 }
 
+// initialise button array with Button input lines
 int buttons_init(struct Button *buttons, struct gpiod_chip *chip)
 {
     int size = component_total(1);
@@ -98,6 +103,7 @@ int buttons_init(struct Button *buttons, struct gpiod_chip *chip)
     return 0;
 }
 
+// initialise Buzzer array with Buzzer output lines
 int buzzers_init(struct gpiod_line *buzzers[], struct gpiod_chip *chip)
 {
     int size = component_total(2);
@@ -108,6 +114,7 @@ int buzzers_init(struct gpiod_line *buzzers[], struct gpiod_chip *chip)
     return 0;
 }
 
+// release all components
 void clean_resources(struct gpiod_line *leds[], struct Button *buttons, struct gpiod_line *buzzers[])
 {
     int i = 0;
