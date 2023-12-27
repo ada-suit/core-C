@@ -30,7 +30,7 @@ void button_value_update(struct Button *buttons, bool *run, bool *shift, int *co
     int i = 0;
     for (i = 0; i < *count; i++) {
         if (buttons[i].sleep == 0) {
-            int value = gpiod_line_get_value(buttons->call);
+            int value = gpiod_line_get_value(buttons[i].call);
 
             if (value < 1) {
                 buttons[i].sleep = *counter + 1; // one second delay 
