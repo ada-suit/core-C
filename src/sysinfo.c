@@ -1,3 +1,5 @@
+#include <stdio.h>
+#include <string.h>
 #include "sysinfo.h"
 
 // run shell commands to process their output

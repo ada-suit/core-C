@@ -1,3 +1,5 @@
+#include <gpiod.h>
+#include <time.h>
 #include "trigger.h"
 
 // trigger different actions depending on button pressed
