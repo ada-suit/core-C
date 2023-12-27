@@ -4,6 +4,11 @@
 char* description(int code) {
     char *description;
 
+    // 10xx Errors related to GPIO connection (pin/chip/lines/etc.)
+    // 11xx Errors related to running system commands
+    // 12xx Errors related to file management (write/read/open/close)
+    // 13xx Errors related to running external shell scripts
+
     switch (code) {
         case 1000:
             description = "initialising GPIO chip";

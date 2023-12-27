@@ -6,7 +6,7 @@ int main()
     bool run = true;
 
     // setting up the counter
-    struct Counter counter = {0, 1};
+    struct Counter counter = {.value = 0, .flag = 1};
     time_t time_now, time_last;
     time(&time_last);
 
