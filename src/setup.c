@@ -41,14 +41,13 @@ int component_total(int component)
 }
 
 // initialise the gpio chip
-int chip_init(struct gpiod_chip **chip)
+void chip_init(struct gpiod_chip **chip, bool *start)
 {
     *chip = gpiod_chip_open_by_name(GPIO_CHIP_NAME);
     if (!(*chip)) {
-        perror("Error opening GPIO chip");
-        return 1;
+        printe(1001, "GPIO chip", SEVERE);
+        start = false;
     }
-    return 0;
 }
 
 // initalise lines and configure them for input/output
@@ -56,63 +55,72 @@ int line_init(struct gpiod_line **line, struct gpiod_chip *chip, struct Ports *p
 {
     *line = gpiod_chip_get_line(chip, port->pin);
     if (!(*line)) {
-        perror("Error opening GPIO line");
         gpiod_chip_close(chip);
-        return 1;
+        return 1001;
     }
     if (mode) {
         // input
         if (gpiod_line_request_input(*line, port->name) < 0) {
-            perror("Error configuring GPIO line for input");
             gpiod_line_release(*line);
             gpiod_chip_close(chip);
-            return 1;
+            return 1002;
         }    
     } else {
         // output
         if (gpiod_line_request_output(*line, port->name, 0) < 0) {
-            perror("Error configuring GPIO line");
             gpiod_line_release(*line);
             gpiod_chip_close(chip);
-            return 1;
+            return 1003;
         }
     }
-    
+
     return 0;
 }
 
 // initialise LED array with LED output lines
-int leds_init(struct gpiod_line *leds[], struct gpiod_chip *chip)
+void leds_init(struct gpiod_line *leds[], struct gpiod_chip *chip, bool *start)
 {
     int size = component_total(0);
-    int i = 0;
+    int i, status;
+
     for (i = 0; i < size; i++) {
-        line_init(&leds[i], chip, &leds_info[i], OUTPUT);
+        status = line_init(&leds[i], chip, &leds_info[i], OUTPUT);
+        if (status != 0) {
+            printe(status, "LED init", SEVERE);
+            start = false;
+        }
     }
-    return 0;
 }
 
 // initialise button array with Button input lines
-int buttons_init(struct Button *buttons, struct gpiod_chip *chip)
+void buttons_init(struct Button *buttons, struct gpiod_chip *chip, bool *start)
 {
     int size = component_total(1);
-    int i = 0;
+    int i, status;
+
     for (i = 0; i < size; i++) {
-        line_init(&buttons[i].call, chip, &buttons_info[i], INPUT);
         buttons[i].sleep = 0; // by default buttons aren't on cooldown
+        status = line_init(&buttons[i].call, chip, &buttons_info[i], INPUT);
+        if (status != 0) {
+            printe(status, "Button init", SEVERE);
+            start = false;
+        }
     }
-    return 0;
 }
 
 // initialise Buzzer array with Buzzer output lines
-int buzzers_init(struct gpiod_line *buzzers[], struct gpiod_chip *chip)
+void buzzers_init(struct gpiod_line *buzzers[], struct gpiod_chip *chip, bool *start)
 {
     int size = component_total(2);
-    int i = 0;
+    int i, status;
+
     for (i = 0; i < size; i++) {
-        line_init(&buzzers[i], chip, &buzzers_info[i], OUTPUT);
+        status = line_init(&buzzers[i], chip, &buzzers_info[i], OUTPUT);
+        if (status != 0) {
+            printe(status, "Buzzer init", SEVERE);
+            start = false;
+        }
     }
-    return 0;
 }
 
 // release all components

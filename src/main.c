@@ -2,6 +2,9 @@
 
 int main() 
 {
+    // conditions to run the program
+    bool run = true;
+
     // setting up the counter
     struct Counter counter = {0, 1};
     time_t time_now, time_last;
@@ -9,23 +12,22 @@ int main()
 
     // initialising the chip
     struct gpiod_chip *chip;
-    chip_init(&chip);
+    chip_init(&chip, &run);
 
     // initialising all components
     struct gpiod_line *leds[component_total(LED)];
-    leds_init(leds, chip);
+    leds_init(leds, chip, &run);
 
     struct gpiod_line *buzzers[component_total(BUZ)];
-    buzzers_init(buzzers, chip);
+    buzzers_init(buzzers, chip, &run);
 
     int button_count = component_total(BUT);      // [1]
     struct Button buttons[button_count];
-    buttons_init(buttons, chip);
+    buttons_init(buttons, chip, &run);
 
     bool button_shift = false; // toggle shift state [2]
 
     // main loop; runs forever unless requested to not run
-    bool run = true;
     while (run) {
         // trigger every 5 minutes
         if (counter.value % FIVE_MIN == 0 && counter.flag) {
