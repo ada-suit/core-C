@@ -1,18 +1,10 @@
 #include "trigger.h"
 
 // trigger different actions depending on button pressed
-void button_call(int *id, bool *shift, bool *run)
+void button_call(int *id, bool *shift)
 {
     int condition = (*id * 10) + *shift;  // id
     switch (condition) {
-        case 0:  // 00 = button 0 & toggle shift off
-            *run = false;
-            printf("terminating...\n");
-            break;
-
-        case 1:  // 01 = button 0 & toggle shift on
-            break;
-
         case 10: // 10 = button 1 & toggle shift off
             break;
 
@@ -25,16 +17,16 @@ void button_call(int *id, bool *shift, bool *run)
 }
 
 // check if a button has been pressed
-void button_value_update(struct Button *buttons, bool *run, bool *shift, int *count, uint *counter)
+void button_value_update(struct Button *buttons, int *count, uint *counter, bool *shift)
 {
-    int i = 0;
-    for (i = 0; i < *count; i++) {
+    int i = 1;
+    for (i = 1; i < *count; i++) {
         if (buttons[i].sleep == 0) {
             int value = gpiod_line_get_value(buttons[i].call);
 
             if (value < 1) {
                 buttons[i].sleep = *counter + 1; // one second delay 
-                button_call(&i, shift, run);
+                button_call(&i, shift);
             }
         }
     }
