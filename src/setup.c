@@ -2,17 +2,18 @@
 #include "errors.h"
 
 struct Ports leds_info[] = {
-    {"power"  , 26},
-    {"network", 21},
-    {"shift",   23}
+    {"power"  , 26}  // indicate power stability
+    {"network", 21}, // indicate internet connectivity
+    {"shiftL",  23}  // indicate shift status
 };
 
 struct Ports buttons_info[] = {
-    {"cease"  , 24} // terminate the program
+    {"cease"  , 17}, // terminate the program
+    {"shiftB" , 24}  // toggle shift mode
 };
 
 struct Ports buzzers_info[] = {
-    {"all"    , 17} // only buzzer I am using
+    {"all"    , 13}  // only buzzer I am using; used for all purpose
 };
 
 // get total number of each component
