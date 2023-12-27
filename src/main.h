@@ -4,7 +4,6 @@
 #include <gpiod.h>
 
 #include "setup.h"
-#include "inform.h"
 #include "sysinfo.h"
 #include "trigger.h"
 

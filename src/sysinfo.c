@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <string.h>
+
 #include "sysinfo.h"
+#include "errors.h"
 
 // run shell commands to process their output
 int run_command(const char *command, char *buffer, short buffer_size)

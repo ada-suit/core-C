@@ -1,4 +1,5 @@
 #include "setup.h"
+#include "errors.h"
 
 struct Ports leds_info[] = {
     {"power"  , 26},
