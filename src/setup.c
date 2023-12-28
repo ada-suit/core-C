@@ -2,14 +2,17 @@
 #include "errors.h"
 
 struct Ports leds_info[] = {
-    {"power"  , 26}  // indicate power stability
-    {"network", 21}, // indicate internet connectivity
-    {"shiftL",  23}  // indicate shift status
+    {"power"  , 26}, // 0  indicate power stability
+    {"network", 21}, // 1  indicate internet connectivity
+    {"shiftL",  23}  // 2  indicate shift status
 };
 
 struct Ports buttons_info[] = {
-    {"cease"  , 17}, // terminate the program
-    {"shiftB" , 24}  // toggle shift mode
+    {"cease"  ,  5}, // 0  terminate the program
+    {"shiftB" , 24}, // 1  toggle shift mode
+    {"buttest", 17}, // 2 
+    {"buttest", 27}, // 3 
+    {"buttest", 22}  // 4 
 };
 
 struct Ports buzzers_info[] = {
