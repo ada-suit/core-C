@@ -1,8 +1,7 @@
 #include <stdio.h>
 #include "errors.h"
 
-char* description(int code) {
-    char *description;
+char *description(int code) {
 
     // 10xx Errors related to GPIO connection (pin/chip/lines/etc.)
     // 11xx Errors related to running system commands
@@ -11,39 +10,29 @@ char* description(int code) {
 
     switch (code) {
         case 1000:
-            description = "initialising GPIO chip";
-            break;
+            return "initialising GPIO chip";
 
         case 1001:
-            description = "opening GPIO line";
-            break;
+            return "opening GPIO line";
 
         case 1002:
-            description = "establishing GPIO line as INPUT";
-            break;
+            return "establishing GPIO line as INPUT";
 
         case 1003:
-            description = "establishing GPIO line as OUTPUT";
-            break;
+            return "establishing GPIO line as OUTPUT";
 
         case 1100:
-            description = "opening pipe for command execution";
-            break;
+            return "opening pipe for command execution";
 
         case 1101:
-            description = "reading command output from pipe";
-            break;
+            return "reading command output from pipe";
 
         case 1103:
-            description = "closing pipe after command execution";
-            break;
+            return "closing pipe after command execution";
 
         default:
-            description = "UNKNOWN ERROR";
-            break;
+            return "UNKNOWN ERROR";
     }
-
-    return description;
 }
 
 // print error
