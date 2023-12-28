@@ -15,6 +15,8 @@ While I aim to include all planned functionalities, my main focus is to improve 
 
 \* full set of features (planned and added) can be viewed at the [Project Board](https://github.com/users/karshPrime/projects/6/views/1).
 
+> PS: In the [project board](https://github.com/users/karshPrime/projects/6/views/1), click on a card's title (especially for cards in **In Progress**, **In Review**, and **Done**) to get more information about it's specifics.
+
 ## Getting Started
 
 ### Prerequisites
