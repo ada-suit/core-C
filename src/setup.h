@@ -14,7 +14,7 @@ struct Ports {
 
 struct Button {
     struct gpiod_line *call;
-    bool sleep;
+    uint sleep;
 };
 
 int component_total(int index);
