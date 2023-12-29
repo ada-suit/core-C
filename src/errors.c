@@ -7,6 +7,7 @@ char *description(int code) {
     // 11xx Errors related to running system commands
     // 12xx Errors related to file management (write/read/open/close)
     // 13xx Errors related to running external shell scripts
+    // 99xx Errors related to misusing defined functions
 
     switch (code) {
         case 1000:
@@ -29,6 +30,9 @@ char *description(int code) {
 
         case 1103:
             return "closing pipe after command execution";
+
+        case 9900:
+            return "invalid function argument";
 
         default:
             return "UNKNOWN ERROR";
