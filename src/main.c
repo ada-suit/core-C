@@ -15,13 +15,13 @@ int main()
     chip_init(&chip, &run);
 
     // initialising all components
-    struct gpiod_line *leds[component_total(LED)];
+    struct gpiod_line *leds[leds_total()];
     leds_init(leds, chip, &run);
 
-    struct gpiod_line *buzzers[component_total(BUZ)];
+    struct gpiod_line *buzzers[buzzers_total()];
     buzzers_init(buzzers, chip, &run);
 
-    int button_count = component_total(BUT);      // [1]
+    int button_count = button_total(BUT);      // [1]
     struct Button buttons[button_count];
     buttons_init(buttons, chip, &run);
 
@@ -43,12 +43,11 @@ int main()
         // update the counter
         counter_update(&time_now, &time_last, &counter);
     }
-
-    // turn off all LEDs
-    led_call_off(leds, component_total(LED));
-
+    
     // release resources
-    clean_resources(leds, buttons, buzzers);
+    leds_free(leds);
+    buttons_free(buttons);
+    buzzers_free(buzzers);
     gpiod_chip_close(chip);
 
     return 0;

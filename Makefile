@@ -7,7 +7,8 @@ LDFLAGS = -lgpiod
 
 TARGET = bin
 SRC_DIR = src
-SRC_FILES := $(wildcard $(SRC_DIR)/*.c)
+COMPONENTS_DIR = $(SRC_DIR)/components
+SRC_FILES := $(wildcard $(SRC_DIR)/*.c) $(wildcard $(COMPONENTS_DIR)/*.c)
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(SRC_DIR)/%.o)
 
 all: $(TARGET)
