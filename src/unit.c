@@ -1,7 +1,7 @@
-#include "component.h"
+#include "unit.h"
 
 // initalise lines and configure them for input/output
-int line_init(struct gpiod_line **line, struct gpiod_chip *chip, struct Ports *port, bool mode)
+int line_init(UNIT_LINE **line, UNIT_CHIP *chip, Ports *port, bool mode)
 {
     *line = gpiod_chip_get_line(chip, port->pin);
     if (!(*line)) {
