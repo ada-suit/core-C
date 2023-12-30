@@ -2,9 +2,10 @@
 #define LED_h
 
 #include <gpiod.h>
+#include "../unit.h"
 
 int leds_total();
-void leds_init(struct gpiod_line *leds[], struct gpiod_chip *chip, bool *start);
-void leds_free(struct gpiod_line *leds[]);
+void leds_init(UNIT_LINE *leds[], UNIT_CHIP *chip, bool *start);
+void leds_free(UNIT_LINE *leds[]);
 
 #endif

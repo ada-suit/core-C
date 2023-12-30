@@ -1,8 +1,7 @@
 #include "buzzer.h"
-#include "../components.h"
 #include "../errors.h"
 
-struct Ports buzzers_info[] = {
+Ports buzzers_info[] = {
     {"all"    , 13}  // only buzzer I am using; used for all purpose
 };
 
@@ -12,7 +11,7 @@ int buzzers_total()
 }
 
 // initialise Buzzer array with Buzzer output lines
-void buzzers_init(struct gpiod_line *buzzers[], struct gpiod_chip *chip, bool *start)
+void buzzers_init(UNIT_LINE *buzzers[], UNIT_CHIP *chip, bool *start)
 {
     int i, status;
     for (i = 0; i < buzzers_total(); i++) {
@@ -24,7 +23,7 @@ void buzzers_init(struct gpiod_line *buzzers[], struct gpiod_chip *chip, bool *s
     }
 }
 
-void buzzers_free(struct gpiod_line *buzzers[])
+void buzzers_free(UNIT_LINE *buzzers[])
 {
     for (i = 0; i < buzzers_total(); i++) {
         gpiod_line_release(buzzers[i]);

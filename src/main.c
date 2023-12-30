@@ -6,23 +6,23 @@ int main()
     bool run = true;
 
     // setting up the counter
-    struct Counter counter = {.value = 0, .flag = 1};
+    Counter counter = {.value = 0, .flag = 1};
     time_t time_now, time_last;
     time(&time_last);
 
     // initialising the chip
-    struct gpiod_chip *chip;
+    UNIT_CHIP *chip;
     chip_init(&chip, &run);
 
     // initialising all components
-    struct gpiod_line *leds[leds_total()];
+    UNIT_LINE *leds[leds_total()];
     leds_init(leds, chip, &run);
 
-    struct gpiod_line *buzzers[buzzers_total()];
+    UNIT_LINE *buzzers[buzzers_total()];
     buzzers_init(buzzers, chip, &run);
 
     int button_count = button_total(BUT);      // [1]
-    struct Button buttons[button_count];
+    Button buttons[button_count];
     buttons_init(buttons, chip, &run);
 
     bool button_shift = false; // toggle shift state [2]

@@ -2,9 +2,10 @@
 #define BUZZER_h
 
 #include <gpiod.h>
+#include "../unit.h"
 
 #define GPIO_CHIP_NAME "gpiochip0"
 
-void chip_init(struct gpiod_chip **chip, bool *start);
+void chip_init(UNIT_CHIP **chip, bool *start);
 
 #endif

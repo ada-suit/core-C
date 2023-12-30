@@ -1,8 +1,7 @@
 #include "led.h"
-#include "../components.h"
 #include "../errors.h"
 
-struct Ports leds_info[] = {
+Ports leds_info[] = {
     {"power"  , 26}, // 0  indicate power stability
     {"network", 21}, // 1  indicate internet connectivity
     {"shiftL",  23}  // 2  indicate shift status
@@ -15,7 +14,7 @@ int leds_total()
 }
 
 // initialise LED array with LED output lines
-void leds_init(struct gpiod_line *leds[], struct gpiod_chip *chip, bool *start)
+void leds_init(UNIT_LINE *leds[], UNIT_CHIP *chip, bool *start)
 {
     int i, status;
     for (i = 0; i < leds_total(); i++) {
@@ -28,7 +27,7 @@ void leds_init(struct gpiod_line *leds[], struct gpiod_chip *chip, bool *start)
 }
 
 // turn off all LEDs
-void leds_off(struct gpiod_line *leds[])
+void leds_off(UNIT_LINE *leds[])
 {
     int i = 0;
     for (i = 0; i < leds_total(); i++) {
@@ -37,7 +36,7 @@ void leds_off(struct gpiod_line *leds[])
 }
 
 // release resource
-void leds_free(struct gpiod_line *leds[])
+void leds_free(UNIT_LINE *leds[])
 {
     leds_off(leds);
 

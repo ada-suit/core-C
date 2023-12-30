@@ -2,23 +2,23 @@
 #include <time.h>
 #include "trigger.h"
 
-void warn_indicate(struct gpiod_line *buzzer, struct gpiod_line *led, uint *counter)
+void warn_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
 {
     //
 }
 
-void notify_indicate(struct gpiod_line *buzzer, struct gpiod_line *led, uint *counter)
+void notify_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
 {
     //
 }
 
-void alarm_indicate(struct gpiod_line *buzzer, struct gpiod_line *led, uint *counter)
+void alarm_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
 {
     //
 }
 
 // increment counter with time (seconds)
-void counter_update(time_t *ntime, time_t *ltime, struct Counter *counter) 
+void counter_update(time_t *ntime, time_t *ltime, Counter *counter) 
 {
     time(ntime);
 
@@ -30,4 +30,3 @@ void counter_update(time_t *ntime, time_t *ltime, struct Counter *counter)
         counter->flag = 1;
     }
 }
-

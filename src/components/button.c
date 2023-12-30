@@ -1,8 +1,7 @@
 #include "button.h"
-#include "../component.h"
 #include "../errors.h"
 
-struct Ports buttons_info[] = {
+Ports buttons_info[] = {
     {"cease"  ,  5}, // 0  terminate the program
     {"shiftB" , 24}, // 1  toggle shift mode
     {"buttest", 17}, // 2 
@@ -17,7 +16,7 @@ int buttons_total()
 }
 
 // initialise button array with Button input lines
-void buttons_init(struct Button *buttons, struct gpiod_chip *chip, bool *start)
+void buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start)
 {
     int i, status;
     for (i = 0; i < leds_total(); i++) {
@@ -47,7 +46,7 @@ void button_call(int *id, bool *shift)
 }
 
 // check if a button has been pressed
-void button_value_update(struct Button *buttons, int *count, uint *counter, bool *shift)
+void button_value_update(Button *buttons, int *count, uint *counter, bool *shift)
 {
     int i = 1;
     for (i = 1; i < *count; i++) {
@@ -63,7 +62,7 @@ void button_value_update(struct Button *buttons, int *count, uint *counter, bool
 }
 
 // manage button debounce
-void button_state_update(struct Button *buttons, int *count, uint *counter)
+void button_state_update(Button *buttons, int *count, uint *counter)
 {
     int i = 0;
     for (i = 0; i < *count; i++) {
@@ -74,7 +73,7 @@ void button_state_update(struct Button *buttons, int *count, uint *counter)
 }
 
 // release resource
-void buttons_free(struct Button *buttons)
+void buttons_free(Button *buttons)
 {
     for (i = 0; i < leds_total(); i++) {
         gpiod_line_release(buttons[i].call);
