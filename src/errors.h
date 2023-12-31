@@ -6,6 +6,6 @@
 #define SEVERE 1
 #define NOTSEVERE 0
 
-void printe(int code, char *identifier, bool severe);
+void printe(int code, const char identifier[16], bool severe);
 
 #endif

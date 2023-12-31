@@ -40,7 +40,7 @@ char *description(int code) {
 }
 
 // print error
-void printe(int code, char identifier[16], bool severe)
+void printe(int code, const char identifier[16], bool severe)
 {
     int green = 0xFF;
     if (severe) {
