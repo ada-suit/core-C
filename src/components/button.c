@@ -4,9 +4,9 @@
 Ports buttons_info[] = {
     {"cease"  ,  5}, // 0  terminate the program
     {"shiftB" , 24}, // 1  toggle shift mode
-    {"buttest", 17}, // 2 
-    {"buttest", 27}, // 3 
-    {"buttest", 22}  // 4 
+    {"input1" , 17}, // 2  ports forwarded for virtual buttons
+    {"input2" , 27}, // 3  ports forwarded for virtual buttons
+    {"input3" , 22}  // 4  ports forwarded for virtual buttons
 };
 
 // return total count of all buttons
@@ -30,9 +30,8 @@ void buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start)
 }
 
 // trigger different actions depending on button pressed
-void button_call(int *id, bool *shift)
+void button_call(short condition)
 {
-    int condition = (*id * 10) + *shift;  // id
     switch (condition) {
         case 10: // 10 = button 1 & toggle shift off
             break;
@@ -46,30 +45,27 @@ void button_call(int *id, bool *shift)
 }
 
 // check if a button has been pressed
-void button_value_update(Button *buttons, int *count, uint *counter, bool *shift)
+void buttons_update(Button *buttons, int *count, uint *counter, bool *shift)
 {
     int i = 1;
+    short condition = *shift;
+
     for (i = 1; i < *count; i++) {
-        if (buttons[i].sleep == 0) {
+        if (buttons[i].sleep <= *counter) {
+            buttons[i].sleep = 0;
+
+        } else if (buttons[i].sleep == 0) {
             int value = gpiod_line_get_value(buttons[i].call);
 
             if (value < 1) {
                 buttons[i].sleep = *counter + 1; // one second delay 
-                button_call(&i, shift);
+                condition *= 10;
+                condition += 1;
             }
         }
     }
-}
 
-// manage button debounce
-void button_state_update(Button *buttons, int *count, uint *counter)
-{
-    int i = 0;
-    for (i = 0; i < *count; i++) {
-        if (buttons[i].sleep <= *counter) {
-            buttons[i].sleep = 0;
-        }
-    }
+    button_call(condition);
 }
 
 // release resource

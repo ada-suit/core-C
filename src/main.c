@@ -34,8 +34,7 @@ int main()
             gpiod_line_set_value(leds[0], power_stable());
         }
 
-        button_state_update(buttons, &button_count, &counter.value);
-        button_value_update(buttons, &button_count, &counter.value, &button_shift);
+        buttons_update(buttons, &button_count, &counter.value, &button_shift);
 
         // stop when button 0 is pressed
         run = 0 < gpiod_line_get_value(buttons[0].call);
