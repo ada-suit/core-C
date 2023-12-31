@@ -7,7 +7,7 @@ Ports buzzers_info[] = {
 
 int buzzers_total()
 {
-    return size = sizeof(buzzers_info) / sizeof(buzzers_info[0]);
+    return sizeof(buzzers_info) / sizeof(buzzers_info[0]);
 }
 
 // initialise Buzzer array with Buzzer output lines
@@ -25,6 +25,7 @@ void buzzers_init(UNIT_LINE *buzzers[], UNIT_CHIP *chip, bool *start)
 
 void buzzers_free(UNIT_LINE *buzzers[])
 {
+    int i = 0;
     for (i = 0; i < buzzers_total(); i++) {
         gpiod_line_release(buzzers[i]);
     }

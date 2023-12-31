@@ -1,5 +1,5 @@
-#ifndef BUZZER_h
-#define BUZZER_h
+#ifndef CHIP_h
+#define CHIP_h
 
 #include <gpiod.h>
 #include "../unit.h"

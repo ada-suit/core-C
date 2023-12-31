@@ -12,14 +12,14 @@ Ports buttons_info[] = {
 // return total count of all buttons
 int buttons_total()
 {
-    size = sizeof(buttons_info) / sizeof(buttons_info[0]);
+    return sizeof(buttons_info) / sizeof(buttons_info[0]);
 }
 
 // initialise button array with Button input lines
 void buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start)
 {
     int i, status;
-    for (i = 0; i < leds_total(); i++) {
+    for (i = 0; i < buttons_total(); i++) {
         buttons[i].sleep = 0; // by default buttons aren't on cooldown
         status = line_init(&buttons[i].call, chip, &buttons_info[i], INPUT);
         if (status != 0) {
@@ -75,7 +75,8 @@ void button_state_update(Button *buttons, int *count, uint *counter)
 // release resource
 void buttons_free(Button *buttons)
 {
-    for (i = 0; i < leds_total(); i++) {
+    int i = 0;
+    for (i = 0; i < buttons_total(); i++) {
         gpiod_line_release(buttons[i].call);
     }
 }

@@ -1,7 +1,6 @@
 #ifndef TRIGGER_H
 #define TRIGGER_H
 
-#include "setup.h"
 #include "unit.h"
 
 struct Counter {

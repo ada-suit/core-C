@@ -12,9 +12,9 @@ struct Ports {
 };
 
 typedef struct Ports Ports;
-typedef struct gpiod_line GPIO_LINE;
-typedef struct gpiod_chip GPIO_CHIP;
+typedef struct gpiod_line UNIT_LINE;
+typedef struct gpiod_chip UNIT_CHIP;
 
-int line_init(GPIO_LINE **line, GPIO_CHIP *chip, Ports *port, bool mode);
+int line_init(UNIT_LINE **line, UNIT_CHIP *chip, Ports *port, bool mode);
 
 #endif

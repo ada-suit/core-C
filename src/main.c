@@ -21,11 +21,11 @@ int main()
     UNIT_LINE *buzzers[buzzers_total()];
     buzzers_init(buzzers, chip, &run);
 
-    int button_count = button_total(BUT);      // [1]
+    int button_count = buttons_total(); //            [1]
     Button buttons[button_count];
     buttons_init(buttons, chip, &run);
 
-    bool button_shift = false; // toggle shift state [2]
+    bool button_shift = false; // toggle shift state  [2]
 
     // main loop; runs forever unless requested to not run
     while (run) {
