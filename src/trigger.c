@@ -1,5 +1,6 @@
 #include <gpiod.h>
 #include <time.h>
+#include <limits.h>
 #include "trigger.h"
 
 void warn_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
@@ -28,5 +29,9 @@ void counter_update(time_t *ntime, time_t *ltime, Counter *counter)
         *ltime = *ntime;
         counter->value++;
         counter->flag = 1;
+
+        if (counter->value == UINT_MAX) {
+            counter->value = 0;
+        }
     }
 }
