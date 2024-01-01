@@ -57,7 +57,7 @@ void buttons_update(Button *buttons, int *count, uint *counter, bool *shift)
         } else if (buttons[i].sleep == 0) {
             int value = gpiod_line_get_value(buttons[i].call);
 
-            if (value < 1) {
+            if (value == 1) {
                 buttons[i].sleep = *counter + 1; // one second delay 
                 condition *= 10;
                 condition += 1;

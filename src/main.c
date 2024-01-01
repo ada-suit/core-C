@@ -1,4 +1,5 @@
 #include "main.h"
+#include <stdio.h>
 
 int main() 
 {
@@ -37,7 +38,7 @@ int main()
         buttons_update(buttons, &button_count, &counter.value, &button_shift);
 
         // stop when button 0 is pressed
-        run = 0 < gpiod_line_get_value(buttons[0].call);
+        run = !gpiod_line_get_value(buttons[0].call);
 
         // update the counter
         counter_update(&time_now, &time_last, &counter);
