@@ -3,12 +3,10 @@
 
 #include "unit.h"
 
-struct Counter {
+typedef struct {
     uint value;
     bool flag;
-};
-
-typedef struct Counter Counter;
+} Counter;
 
 void warn_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter);
 void notify_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter);

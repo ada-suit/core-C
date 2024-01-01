@@ -6,12 +6,11 @@
 #define OUTPUT 0
 #define INPUT  1
 
-struct Ports {
+typedef struct {
     char name[8];
     int pin;
-};
+} Port;
 
-typedef struct Ports Ports;
 typedef struct gpiod_line UNIT_LINE;
 typedef struct gpiod_chip UNIT_CHIP;
 
