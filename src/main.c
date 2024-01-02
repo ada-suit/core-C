@@ -16,14 +16,13 @@ int main()
     chip_init(&chip, &run);
 
     // initialising all components
-    UNIT_LINE *leds[leds_total()];
+    UNIT_LINE *leds[LEDS_COUNT];
     leds_init(leds, chip, &run);
 
-    UNIT_LINE *buzzers[buzzers_total()];
+    UNIT_LINE *buzzers[BUZZERS_COUNT];
     buzzers_init(buzzers, chip, &run);
 
-    int button_count = buttons_total(); //            [1]
-    Button buttons[button_count];
+    Button buttons[BUTTONS_COUNT];
     buttons_init(buttons, chip, &run);
 
     bool button_shift = false; // toggle shift state  [2]
@@ -35,7 +34,7 @@ int main()
             gpiod_line_set_value(leds[0], power_stable());
         }
 
-        buttons_update(buttons, &button_count, &counter.value, &button_shift);
+        buttons_update(buttons, &counter.value, &button_shift);
 
         // stop when button 0 is pressed
         run = !gpiod_line_get_value(buttons[0].call);

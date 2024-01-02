@@ -14,6 +14,6 @@ typedef struct {
 typedef struct gpiod_line UNIT_LINE;
 typedef struct gpiod_chip UNIT_CHIP;
 
-int line_init(UNIT_LINE **line, UNIT_CHIP *chip, Ports *port, bool mode);
+int line_init(UNIT_LINE **line, UNIT_CHIP *chip, Port values, bool mode);
 
 #endif
