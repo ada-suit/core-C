@@ -11,8 +11,8 @@ typedef struct {
     uint sleep;
 } Button;
 
-void buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start);
-void buttons_update(Button *buttons, uint *counter, bool *shift);
-void buttons_free(Button *buttons);
+void  buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start);
+short buttons_update(Button *buttons, uint *counter);
+void  buttons_free(Button *buttons);
 
 #endif
