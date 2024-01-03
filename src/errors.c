@@ -1,4 +1,5 @@
 #include <stdio.h>
+#include <time.h>
 #include "errors.h"
 
 char *description(int code) {
@@ -47,7 +48,14 @@ void printe(int code, const char identifier[16], bool severe)
         green = 0;
     }
 
-    printf("\033[38;2;%d;%d;%dmError %d \033[0m", 0xFF, green, 0, code);     // [1]
+    time_t rawtime;
+    struct tm *timeinfo;
+    time(&rawtime);
+    timeinfo = localtime(&rawtime);
+
+    printf("Current time: %02d:%02d:%02d",
+        timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);   
+    printf("\033[38;2;%d;%d;%dmError %d \033[0m", 0xFF, green, 0, code);  // [1]
     printf("\033[38;2;%d;%d;%dm [%s] \033[0m ", 0x62, 0xA0, 0xEA, identifier);
     printf("%s\n", description(code));
 }
