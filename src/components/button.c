@@ -101,17 +101,17 @@ void buttons_update(Button *buttons, uint *counter, bool *shift)
     short condition = 0;
 
     for (i = 1; i < BUTTONS_COUNT; i++) {
-        if (buttons[i].sleep <= *counter) {
-            buttons[i].sleep = 0;
-
-        } else if (buttons[i].sleep == 0) {
+        if (buttons[i].sleep == 0) {
             int value = gpiod_line_get_value(buttons[i].call);
+
+            condition *= 10;
 
             if (value == 1) {
                 buttons[i].sleep = *counter + 1; // one second delay 
-                condition *= 10;
                 condition += 1;
             }
+        } else if (buttons[i].sleep <= *counter) {
+            buttons[i].sleep = 0;
         }
     }
 
