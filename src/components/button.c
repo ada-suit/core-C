@@ -26,7 +26,7 @@ void buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start)
 }
 
 // check if a button has been pressed
-short buttons_update(Button *buttons, uint *counter)
+short buttons_update(Button *buttons, u_int8_t *counter)
 {
     int i = 1;
     short condition = 0;

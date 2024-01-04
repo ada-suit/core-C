@@ -1,6 +1,5 @@
 #include <gpiod.h>
 #include <time.h>
-#include <limits.h>
 #include "trigger.h"
 #include "sysinfo.h"
 
@@ -74,17 +73,17 @@ void button_action(short condition, UNIT_LINE *leds[], bool *shift)
     }
 }
 
-void warn_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
+void warn_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, u_int8_t *counter)
 {
     //
 }
 
-void notify_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
+void notify_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, u_int8_t *counter)
 {
     //
 }
 
-void alarm_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
+void alarm_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, u_int8_t *counter)
 {
     //
 }
@@ -101,7 +100,7 @@ void counter_update(time_t *ntime, time_t *ltime, Counter *counter)
         counter->value++;
         counter->flag = 1;
 
-        if (counter->value == UINT_MAX) {
+        if (counter->value == 255) {
             counter->value = 0;
         }
     }
