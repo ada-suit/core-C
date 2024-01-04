@@ -35,7 +35,7 @@ int main()
         }
 
         short condition = buttons_update(buttons, &counter.value);
-        button_action(condition, leds, &button_shift);
+        button_action(condition, leds, &button_shift, counter);
 
         // stop when button 0 is pressed
         run = !gpiod_line_get_value(buttons[0].call);

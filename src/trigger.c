@@ -1,13 +1,14 @@
 #include <gpiod.h>
 #include <time.h>
+#include <stdio.h>
 #include "trigger.h"
 #include "sysinfo.h"
 
 // trigger different actions depending on button pressed
-void button_action(short condition, UNIT_LINE *leds[], bool *shift)
+void button_action(short status, UNIT_LINE *leds[], bool *shift, Counter count)
 {
-    condition = (condition * 10) + *shift;
-    switch (condition) {
+    status = (status * 10) + *shift;
+    switch (status) {
         // ======== toggle shift ======== //
         case 10: // shift off
             *shift = true;
@@ -21,6 +22,7 @@ void button_action(short condition, UNIT_LINE *leds[], bool *shift)
         
         // ========== button 1 ========== //
         case 100: // shift off
+            printf("Counter value = %u\n", count.value);
             break;
 
         case 101: // shift on

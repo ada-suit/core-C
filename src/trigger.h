@@ -8,7 +8,7 @@ typedef struct {
     bool flag;
 } Counter;
 
-void button_action(short condition, UNIT_LINE *leds[], bool *shift);
+void button_action(short status, UNIT_LINE *leds[], bool *shift, Counter count);
 
 void warn_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, u_int8_t *counter);
 void notify_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, u_int8_t *counter);
