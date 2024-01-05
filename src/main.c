@@ -1,6 +1,5 @@
 #include <gpiod.h>
 #include <stdbool.h>
-#include "include/sysinfo.h"
 #include "include/trigger.h"
 #include "components/include/led.h"
 #include "components/include/button.h"
@@ -33,13 +32,10 @@ int main()
 
     // main loop; runs forever unless requested to not run
     while (run) {
-        // trigger at every counter reset
-        if (counter == 0) {
-            gpiod_line_set_value(leds[0], power_stable());
-        }
 
-        const short condition = buttons_update(buttons, &counter);
-        button_action(condition, leds, &button_shift, counter);
+        // trigger actions
+        automation(leds, &counter);
+        button_action(buttons_update(buttons, &counter), leds, &button_shift, counter);
 
         // stop when button 0 is pressed
         run = !gpiod_line_get_value(buttons[0].call);

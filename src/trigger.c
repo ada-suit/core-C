@@ -76,7 +76,15 @@ void button_action(short status, UNIT_LINE *leds[], bool *shift, const uint coun
     }
 }
 
-void warn_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
+// automate these commands within certain time duration
+void automation(UNIT_LINE *leds[], const uint *counter)
+{
+    if (*counter == 0) {
+        gpiod_line_set_value(leds[0], power_stable());
+    }
+}
+
+
 {
     //
 }
