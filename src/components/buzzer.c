@@ -11,7 +11,7 @@ void buzzers_init(UNIT_LINE *buzzers[], UNIT_CHIP *chip, bool *start)
         const int status = line_init(&buzzers[i], chip, list[i], OUTPUT);
         if (status != 0) {
             printe(status, "Buzzer init", SEVERE);
-            start = false;
+            *start = false;
         }
     }
 }

@@ -1,3 +1,4 @@
+#include <stddef.h>
 #include "include/chip.h"
 
 // initialise the gpio chip
@@ -6,6 +7,6 @@ void chip_init(UNIT_CHIP **chip, bool *start)
     *chip = gpiod_chip_open_by_name(GPIO_CHIP_NAME);
     if (*chip == NULL) {
         printe(1001, "GPIO chip", SEVERE);
-        start = false;
+        *start = false;
     }
 }

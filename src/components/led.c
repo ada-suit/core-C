@@ -13,7 +13,7 @@ void leds_init(UNIT_LINE *leds[], UNIT_CHIP *chip, bool *start)
         const int status = line_init(&leds[i], chip, list[i], OUTPUT);
         if (status != 0) {
             printe(status, "LED init", SEVERE);
-            start = false;
+            *start = false;
         }
     }
 }

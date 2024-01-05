@@ -18,7 +18,7 @@ void buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start)
         const int status = line_init(&buttons[i].call, chip, list[i], INPUT);
         if (status != 0) {
             printe(status, "Button init", SEVERE);
-            start = false;
+            *start = false;
         }
     }
 }
