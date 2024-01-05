@@ -5,7 +5,7 @@
 #include "sysinfo.h"
 
 // trigger different actions depending on button pressed
-void button_action(short status, UNIT_LINE *leds[], bool *shift, Counter count)
+void button_action(short status, UNIT_LINE *leds[], bool *shift, const uint count)
 {
     status = (status * 10) + *shift;
     switch (status) {
@@ -22,7 +22,7 @@ void button_action(short status, UNIT_LINE *leds[], bool *shift, Counter count)
         
         // ========== button 1 ========== //
         case 100: // shift off
-            printf("Counter value = %u\n", count.value);
+            printf("Counter value = %u\n", count);
             break;
 
         case 101: // shift on
@@ -75,35 +75,23 @@ void button_action(short status, UNIT_LINE *leds[], bool *shift, Counter count)
     }
 }
 
-void warn_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, u_int8_t *counter)
+void warn_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
 {
     //
 }
 
-void notify_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, u_int8_t *counter)
+void notify_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
 {
     //
 }
 
-void alarm_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, u_int8_t *counter)
+void alarm_indicate(UNIT_LINE *buzzer, UNIT_LINE *led, uint *counter)
 {
     //
 }
 
 // increment counter with time (seconds)
-void counter_update(time_t *ntime, time_t *ltime, Counter *counter) 
+void counter_update(uint *counter)
 {
-    time(ntime);
-
-    if (*ntime == *ltime) {
-        counter->flag = 0;
-    } else {
-        *ltime = *ntime;
-        counter->value++;
-        counter->flag = 1;
-
-        if (counter->value == 255) {
-            counter->value = 0;
-        }
-    }
+    *counter = (*counter + 1) * (*counter != UINT_MAX);
 }

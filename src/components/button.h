@@ -12,7 +12,7 @@ typedef struct {
 } Button;
 
 void  buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start);
-short buttons_update(Button *buttons, u_int8_t *counter);
+short buttons_update(Button *buttons, const uint *counter);
 void  buttons_free(Button *buttons);
 
 #endif

@@ -7,9 +7,7 @@ int main()
     bool run = true;
 
     // setting up the counter
-    Counter counter = {.value = 0, .flag = 1};
-    time_t time_now, time_last;
-    time(&time_last);
+    uint counter = 0;
 
     // initialising the chip
     UNIT_CHIP *chip;
@@ -29,8 +27,8 @@ int main()
 
     // main loop; runs forever unless requested to not run
     while (run) {
-        // trigger every 5 minutes
-        if (counter.value % FIVE_MIN == 0 && counter.flag) {
+        // trigger every 500 loops
+        if (counter % LOOP_500 == 0) {
             gpiod_line_set_value(leds[0], power_stable());
         }
 
@@ -41,7 +39,7 @@ int main()
         run = !gpiod_line_get_value(buttons[0].call);
 
         // update the counter
-        counter_update(&time_now, &time_last, &counter);
+        counter_update(&counter);
     }
     
     // release resources

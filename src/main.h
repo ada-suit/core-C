@@ -10,6 +10,6 @@
 #include "components/buzzer.h"
 #include "components/chip.h"
 
-#define FIVE_MIN 300
+#define LOOP_500 500
 
 #endif

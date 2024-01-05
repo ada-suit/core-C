@@ -26,7 +26,7 @@ void buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start)
 }
 
 // check if a button has been pressed
-short buttons_update(Button *buttons, u_int8_t *counter)
+short buttons_update(Button *buttons, const uint *counter)
 {
     int i = 1;
     short condition = 0;
@@ -38,7 +38,7 @@ short buttons_update(Button *buttons, u_int8_t *counter)
             condition *= 10;
 
             if (value == 1) {
-                buttons[i].sleep = *counter + 1; // one second delay 
+                buttons[i].sleep = *counter + 60;
                 condition += 1;
             }
         } else if (buttons[i].sleep <= *counter) {

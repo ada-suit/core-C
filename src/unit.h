@@ -11,6 +11,7 @@ typedef struct {
     int pin;
 } Port;
 
+typedef unsigned int uint;
 typedef struct gpiod_line UNIT_LINE;
 typedef struct gpiod_chip UNIT_CHIP;
 
