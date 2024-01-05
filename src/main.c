@@ -1,4 +1,3 @@
-#include <gpiod.h>
 #include <stdbool.h>
 #include "include/trigger.h"
 #include "components/include/led.h"
@@ -43,7 +42,7 @@ int main()
     leds_free(leds);
     buttons_free(buttons);
     buzzers_free(buzzers);
-    gpiod_chip_close(chip);
+    chip_free(chip);
 
     return 0;
 }
