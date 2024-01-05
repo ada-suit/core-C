@@ -35,7 +35,7 @@ short buttons_update(Button *buttons, const uint *counter)
             condition *= 10;
 
             if (value == 1) {
-                buttons[i].sleep = *counter + 60;
+                buttons[i].sleep = *counter + 12345;
                 condition += 1;
             }
         } else if (buttons[i].sleep <= *counter) {
