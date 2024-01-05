@@ -8,11 +8,9 @@
 
 int main() 
 {
-    // conditions to run the program
-    bool run = true;
-
-    // setting up the counter
-    uint counter = 0;
+    bool run = true;            // conditions to run the program
+    uint counter = 0;           // setting up the counter
+    bool button_shift = false;  // toggle shift state
 
     // initialising the chip
     UNIT_CHIP *chip;
@@ -28,20 +26,17 @@ int main()
     Button buttons[BUTTONS_COUNT];
     buttons_init(buttons, chip, &run);
 
-    bool button_shift = false; // toggle shift state  [2]
-
     // main loop; runs forever unless requested to not run
     while (run) {
+        // update the counter
+        counter_update(&counter);
 
         // trigger actions
         automation(leds, &counter);
         button_action(buttons_update(buttons, &counter), leds, &button_shift, counter);
 
         // stop when button 0 is pressed
-        run = !gpiod_line_get_value(buttons[0].call);
-
-        // update the counter
-        counter_update(&counter);
+        run = run_program(buttons[0]);
     }
     
     // release resources

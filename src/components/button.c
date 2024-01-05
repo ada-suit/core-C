@@ -51,6 +51,12 @@ short buttons_update(Button *buttons, const uint *counter)
     return condition;
 }
 
+bool run_program(Button button)
+{
+    return !gpiod_line_get_value(button.call);
+}
+
+
 // release resource
 void buttons_free(Button *buttons)
 {
