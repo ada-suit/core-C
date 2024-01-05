@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <time.h>
-#include "errors.h"
+#include "include/errors.h"
 
 char *description(const int code) {
 
@@ -41,7 +41,7 @@ char *description(const int code) {
 }
 
 // print error
-void printe(const int code, const char identifier[16], const intb severe)
+void printe(const int code, const char identifier[16], const bool severe)
 {
     time_t rawtime;
     time(&rawtime);

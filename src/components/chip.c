@@ -1,5 +1,4 @@
-#include "chip.h"
-#include "../errors.h"
+#include "include/chip.h"
 
 // initialise the gpio chip
 void chip_init(UNIT_CHIP **chip, bool *start)

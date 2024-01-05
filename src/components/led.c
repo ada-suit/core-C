@@ -1,5 +1,4 @@
-#include "led.h"
-#include "../errors.h"
+#include "include/led.h"
 
 // initialise LED array with LED output lines
 void leds_init(UNIT_LINE *leds[], UNIT_CHIP *chip, bool *start)

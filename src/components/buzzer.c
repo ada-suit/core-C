@@ -1,5 +1,4 @@
-#include "buzzer.h"
-#include "../errors.h"
+#include "include/buzzer.h"
 
 // initialise Buzzer array with Buzzer output lines
 void buzzers_init(UNIT_LINE *buzzers[], UNIT_CHIP *chip, bool *start)

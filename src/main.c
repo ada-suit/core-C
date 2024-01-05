@@ -1,4 +1,12 @@
-#include "main.h"
+#include <gpiod.h>
+#include <stdbool.h>
+#include "include/sysinfo.h"
+#include "include/trigger.h"
+#include "components/include/led.h"
+#include "components/include/button.h"
+#include "components/include/buzzer.h"
+#include "components/include/chip.h"
+#include <stdio.h>
 
 int main() 
 {
@@ -26,9 +34,10 @@ int main()
 
     // main loop; runs forever unless requested to not run
     while (run) {
-        // trigger every 500 loops
-        if (counter % LOOP_500 == 0) {
+        // trigger at every counter reset
+        if (counter == 0) {
             gpiod_line_set_value(leds[0], power_stable());
+            printf("power update\n");
         }
 
         const short condition = buttons_update(buttons, &counter);

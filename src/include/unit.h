@@ -4,6 +4,8 @@
 #include <gpiod.h>
 #include <stdbool.h>
 
+#include "errors.h"
+
 #define OUTPUT 0
 #define INPUT  1
 

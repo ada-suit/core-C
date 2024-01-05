@@ -2,8 +2,8 @@
 #include <stdio.h>
 #include <time.h>
 #include <limits.h>
-#include "trigger.h"
-#include "sysinfo.h"
+#include "include/trigger.h"
+#include "include/sysinfo.h"
 
 // trigger different actions depending on button pressed
 void button_action(short status, UNIT_LINE *leds[], bool *shift, const uint count)

@@ -1,5 +1,4 @@
-#include "button.h"
-#include "../errors.h"
+#include "include/button.h"
 
 // initialise button array with Button input lines
 void buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start)

@@ -2,7 +2,7 @@
 #define CHIP_h
 
 #include <gpiod.h>
-#include "../unit.h"
+#include "../include/unit.h"
 
 #define GPIO_CHIP_NAME "gpiochip0"
 
