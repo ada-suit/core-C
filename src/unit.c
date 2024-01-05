@@ -1,7 +1,7 @@
 #include "unit.h"
 
 // initalise lines and configure them for input/output
-int line_init(UNIT_LINE **line, UNIT_CHIP *chip, Port values, bool mode)
+int line_init(UNIT_LINE **line, UNIT_CHIP *chip, Port values, const bool mode)
 {
     *line = gpiod_chip_get_line(chip, values.pin);
     if (!(*line)) {

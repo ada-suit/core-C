@@ -1,11 +1,10 @@
 #include <stdio.h>
 #include <string.h>
-
 #include "sysinfo.h"
 #include "errors.h"
 
 // run shell commands to process their output
-int run_command(const char *command, char *buffer, short buffer_size)
+int run_command(const char *command, char *buffer, const short buffer_size)
 {
     FILE *cmd_output = popen(command, "r");
     
@@ -27,10 +26,10 @@ int run_command(const char *command, char *buffer, short buffer_size)
 // check if power is indeed stable (throttled=0x0)
 int power_stable()
 {
-    short buffer_size = 17;
+    const short buffer_size = 17;
     char buffer[buffer_size];
-    
-    int status = run_command("vcgencmd get_throttled", buffer, buffer_size);
+
+    const int status = run_command("vcgencmd get_throttled", buffer, buffer_size);
 
     if (status != 0) {
         printe(status, "power LED", NOTSEVERE);

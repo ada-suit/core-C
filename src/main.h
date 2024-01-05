@@ -2,6 +2,7 @@
 #define MAIN_H
 
 #include <gpiod.h>
+#include <stdbool.h>
 
 #include "sysinfo.h"
 #include "trigger.h"

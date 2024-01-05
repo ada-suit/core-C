@@ -1,5 +1,4 @@
 #include "main.h"
-#include <stdio.h>
 
 int main() 
 {
@@ -32,7 +31,7 @@ int main()
             gpiod_line_set_value(leds[0], power_stable());
         }
 
-        short condition = buttons_update(buttons, &counter.value);
+        const short condition = buttons_update(buttons, &counter);
         button_action(condition, leds, &button_shift, counter);
 
         // stop when button 0 is pressed

@@ -1,6 +1,7 @@
 #include <gpiod.h>
-#include <time.h>
 #include <stdio.h>
+#include <time.h>
+#include <limits.h>
 #include "trigger.h"
 #include "sysinfo.h"
 

@@ -2,7 +2,7 @@
 #include <time.h>
 #include "errors.h"
 
-char *description(int code) {
+char *description(const int code) {
 
     // 10xx Errors related to GPIO connection (pin/chip/lines/etc.)
     // 11xx Errors related to running system commands
@@ -41,7 +41,7 @@ char *description(int code) {
 }
 
 // print error
-void printe(int code, const char identifier[16], bool severe)
+void printe(const int code, const char identifier[16], const intb severe)
 {
     int green = 0xFF;
     if (severe) {
@@ -49,13 +49,11 @@ void printe(int code, const char identifier[16], bool severe)
     }
 
     time_t rawtime;
-    struct tm *timeinfo;
     time(&rawtime);
-    timeinfo = localtime(&rawtime);
+    const struct tm *timeinfo = localtime(&rawtime);
 
-    printf("Current time: %02d:%02d:%02d",
-        timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);   
-    printf("\033[38;2;%d;%d;%dmError %d \033[0m", 0xFF, green, 0, code);  // [1]
+    printf("Current time: %02d:%02d:%02d", timeinfo->tm_hour, timeinfo->tm_min, timeinfo->tm_sec);
+    printf("\033[38;2;%d;%d;%dmError %d \033[0m", 0xFF, green, 0, code);
     printf("\033[38;2;%d;%d;%dm [%s] \033[0m ", 0x62, 0xA0, 0xEA, identifier);
     printf("%s\n", description(code));
 }
