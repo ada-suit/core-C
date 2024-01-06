@@ -6,8 +6,9 @@ char *description(const int code) {
 
     // 10xx Errors related to GPIO connection (pin/chip/lines/etc.)
     // 11xx Errors related to running system commands
-    // 12xx Errors related to file management (write/read/open/close)
+    // 12xx Errors related to managing memory
     // 13xx Errors related to running external shell scripts
+    // 14xx Errors related to file management (write/read/open/close)
     // 99xx Errors related to misusing defined functions
 
     switch (code) {
@@ -31,6 +32,9 @@ char *description(const int code) {
 
         case 1103:
             return "closing pipe after command execution";
+
+        case 1200:
+            return "allocating memory in the heap";
 
         case 9900:
             return "invalid function argument";

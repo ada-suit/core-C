@@ -3,7 +3,8 @@
 
 #include <gpiod.h>
 #include <stdbool.h>
-
+#include <stdlib.h>
+#include <stddef.h>
 #include "errors.h"
 
 #define OUTPUT 0

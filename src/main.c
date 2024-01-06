@@ -11,19 +11,10 @@ int main()
     uint counter = 0;           // setting up the counter
     bool button_shift = false;  // toggle shift state
 
-    // initialising the chip
-    UNIT_CHIP *chip;
-    chip_init(&chip, &run);
-
-    // initialising all components
-    UNIT_LINE *leds[LEDS_COUNT];
-    leds_init(leds, chip, &run);
-
-    UNIT_LINE *buzzers[BUZZERS_COUNT];
-    buzzers_init(buzzers, chip, &run);
-
-    Button buttons[BUTTONS_COUNT];
-    buttons_init(buttons, chip, &run);
+    UNIT_CHIP *chip = chip_gen();           // initialising the chip
+    UNIT_LINE **leds = leds_gen();          // initialising all LEDs
+    UNIT_LINE **buzzers = buzzers_gen();    // initialising all buzzers
+    Button *buttons = buttons_gen();        // initialising all buttons
 
     // main loop; runs forever unless requested to not run
     while (run) {
@@ -31,18 +22,19 @@ int main()
         counter_update(&counter);
 
         // trigger actions
-        automation(leds, &counter);
-        button_action(buttons_update(buttons, &counter), leds, &button_shift, counter);
+        const short status = buttons_update(&counter);
+        button_action(status, &button_shift, &counter);
+        automation(&counter);
 
-        // stop when button 0 is pressed
-        run = run_program(buttons[0]);
+        // check if the loop must continue
+        run = run_program();
     }
     
     // release resources
-    leds_free(leds);
-    buttons_free(buttons);
-    buzzers_free(buzzers);
-    chip_free(chip);
+    leds_free();
+    buttons_free();
+    buzzers_free();
+    chip_free();
 
     return 0;
 }

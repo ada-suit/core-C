@@ -4,10 +4,14 @@
 #include <limits.h>
 #include "include/trigger.h"
 #include "include/sysinfo.h"
+#include "components/include/led.h"
+#include "components/include/buzzer.h"
 
 // trigger different actions depending on button pressed
-void button_action(short status, UNIT_LINE *leds[], bool *shift, const uint count)
+void button_action(short status, bool *shift, const uint *count)
 {
+    UNIT_LINE **leds = leds_gen();
+
     status = (status * 10) + *shift;
     switch (status) {
         // ======== toggle shift ======== //
@@ -24,7 +28,7 @@ void button_action(short status, UNIT_LINE *leds[], bool *shift, const uint coun
         // ========== button 1 ========== //
         case 100: // shift off
             printf("button 1 shift off\n");
-            printf("Counter value = %u\n", count);
+            printf("Counter value = %u\n", *count);
             break;
 
         case 101: // shift on
@@ -91,25 +95,26 @@ void button_action(short status, UNIT_LINE *leds[], bool *shift, const uint coun
 }
 
 // automate these commands within certain time duration
-void automation(UNIT_LINE *leds[], const uint *counter)
+void automation(const uint *counter)
 {
+    UNIT_LINE **leds = leds_gen();
+
     if (*counter == 0) {
         gpiod_line_set_value(leds[0], power_stable());
     }
 }
 
-
-void warn_indicate(UNIT_LINE *buzzer, UNIT_LINE *led[], uint *counter)
+void warn_indicate(uint *counter)
 {
     //
 }
 
-void notify_indicate(UNIT_LINE *buzzer, UNIT_LINE *led[], uint *counter)
+void notify_indicate( uint *counter)
 {
     //
 }
 
-void alarm_indicate(UNIT_LINE *buzzer, UNIT_LINE *led[], uint *counter)
+void alarm_indicate(uint *counter)
 {
     //
 }

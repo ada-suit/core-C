@@ -1,7 +1,10 @@
 #include "include/button.h"
+#include "include/chip.h"
+
+#define BUTTONS_COUNT 5
 
 // initialise button array with Button input lines
-void buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start)
+void buttons_init(Button *buttons)
 {
     const Port list[] = {
         {"cease"  , 25}, // 0  terminate the program
@@ -12,20 +15,41 @@ void buttons_init(Button *buttons, UNIT_CHIP *chip, bool *start)
         {"shiftB" , 24} // 4  toggle shift mode
     };
 
+    UNIT_CHIP *chip = chip_gen();
+
     for (int i = 0; i < BUTTONS_COUNT; i++) {
         buttons[i].sleep = 0; // by default buttons aren't on cooldown
 
         const int status = line_init(&buttons[i].call, chip, list[i], INPUT);
         if (status != 0) {
             printe(status, "Button init", SEVERE);
-            *start = false;
         }
     }
 }
 
-// check if a button has been pressed
-short buttons_update(Button *buttons, const uint *counter)
+Button* buttons_gen()
 {
+    static bool generate = true;
+    static Button *buttons;
+
+    if (generate) {
+        buttons = (Button *)malloc(BUTTONS_COUNT * sizeof(Button));
+
+        if (buttons == NULL) {
+            printe(1200, "LED init", SEVERE);
+        }
+
+        buttons_init(buttons);
+        generate = false;
+    }
+
+    return buttons;
+}
+
+// check if a button has been pressed
+short buttons_update(const uint *counter)
+{
+    Button *buttons = buttons_gen();
     short condition = 0;
 
     for (int i = 1; i < BUTTONS_COUNT; i++) {
@@ -51,16 +75,21 @@ short buttons_update(Button *buttons, const uint *counter)
     return condition;
 }
 
-bool run_program(Button button)
+bool run_program()
 {
-    return !gpiod_line_get_value(button.call);
+    Button *buttons = buttons_gen();
+    return !gpiod_line_get_value(buttons[0].call);
 }
 
 
 // release resource
-void buttons_free(Button *buttons)
+void buttons_free()
 {
+    Button *buttons = buttons_gen();
+
     for (int i = 0; i < BUTTONS_COUNT; i++) {
         gpiod_line_release(buttons[i].call);
     }
+
+    free(buttons);
 }
