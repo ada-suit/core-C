@@ -75,13 +75,6 @@ short buttons_update(const uint *counter)
     return condition;
 }
 
-bool run_program()
-{
-    Button *buttons = buttons_gen();
-    return !gpiod_line_get_value(buttons[0].call);
-}
-
-
 // release resource
 void buttons_free()
 {

@@ -11,7 +11,6 @@ typedef struct {
 
 Button* buttons_gen();
 short buttons_update(const uint *counter);
-bool  run_program();
 void  buttons_free();
 
 #endif

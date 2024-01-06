@@ -5,10 +5,11 @@
 #include "include/trigger.h"
 #include "include/sysinfo.h"
 #include "components/include/led.h"
+#include "components/include/button.h"
 #include "components/include/buzzer.h"
 
 // trigger different actions depending on button pressed
-void button_action(short status, bool *shift, const uint *count)
+void call_action(short status, bool *shift, const uint *count)
 {
     UNIT_LINE **leds = leds_gen();
 
@@ -95,7 +96,7 @@ void button_action(short status, bool *shift, const uint *count)
 }
 
 // automate these commands within certain time duration
-void automation(const uint *counter)
+void auto_action(const uint *counter)
 {
     UNIT_LINE **leds = leds_gen();
 
@@ -117,6 +118,12 @@ void notify_indicate( uint *counter)
 void alarm_indicate(uint *counter)
 {
     //
+}
+
+bool keep_running()
+{
+    Button *buttons = buttons_gen();
+    return !gpiod_line_get_value(buttons[0].call);
 }
 
 // increment counter with time (seconds)

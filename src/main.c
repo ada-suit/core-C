@@ -23,11 +23,11 @@ int main()
 
         // trigger actions
         const short status = buttons_update(&counter);
-        button_action(status, &button_shift, &counter);
-        automation(&counter);
+        call_action(status, &button_shift, &counter);
+        auto_action(&counter);
 
         // check if the loop must continue
-        run = run_program();
+        run = keep_running();
     }
     
     // release resources
