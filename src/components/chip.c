@@ -25,6 +25,4 @@ void chip_free()
 {
     UNIT_CHIP *chip = chip_gen();
     gpiod_chip_close(chip);
-
-    free(chip);
 }

@@ -11,10 +11,10 @@ int main()
     uint counter = 0;           // setting up the counter
     bool button_shift = false;  // toggle shift state
 
-    UNIT_CHIP *chip = chip_gen();           // initialising the chip
-    UNIT_LINE **leds = leds_gen();          // initialising all LEDs
-    UNIT_LINE **buzzers = buzzers_gen();    // initialising all buzzers
-    Button *buttons = buttons_gen();        // initialising all buttons
+    chip_gen();       // initialising the chip
+    leds_gen();       // initialising all LEDs
+    buzzers_gen();    // initialising all buzzers
+    buttons_gen();    // initialising all buttons
 
     // main loop; runs forever unless requested to not run
     while (run) {
@@ -31,10 +31,10 @@ int main()
     }
     
     // release resources
-    leds_free();
-    buttons_free();
-    buzzers_free();
-    chip_free();
+    chip_free();      // release the chip
+    leds_free();      // free all LEDs connections and memory
+    buzzers_free();   // free all buzzers connections and memory
+    buttons_free();   // free all buttons connections and memory
 
     return 0;
 }
