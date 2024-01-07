@@ -1,15 +1,9 @@
 #ifndef BUTTON_h
 #define BUTTON_h
 
-#include <gpiod.h>
 #include "../include/unit.h"
 
-typedef struct {
-    struct gpiod_line *call;
-    uint sleep;
-} Button;
-
-Button* buttons_gen();
+Unit* buttons_gen();
 short buttons_update(const uint *counter);
 void  buttons_free();
 

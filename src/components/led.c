@@ -4,7 +4,7 @@
 #define LEDS_COUNT 3
 
 // initialise LED array with LED output lines
-void leds_init(UNIT_LINE *leds[])
+void leds_init(Unit *leds)
 {
     const Port list[] = {
         {"power"  , 26}, // 0  indicate power stability
@@ -16,7 +16,9 @@ void leds_init(UNIT_LINE *leds[])
     UNIT_CHIP *chip = chip_gen();
 
     for (int i = 0; i < LEDS_COUNT; i++) {
-        const int status = line_init(&leds[i], chip, list[i], OUTPUT);
+        leds[i].sleep = 0;
+
+        const int status = line_init(&leds[i].call, chip, list[i], OUTPUT);
         if (status != 0) {
             printe(status, "LED init", SEVERE);
         }
@@ -24,13 +26,13 @@ void leds_init(UNIT_LINE *leds[])
 }
 
 // generate an array of gpiod LEDs lines
-UNIT_LINE** leds_gen()
+Unit* leds_gen()
 {
     static bool generate = true;
-    static UNIT_LINE **leds;
+    static Unit *leds;
 
     if (generate) {
-        leds = (UNIT_LINE **)malloc(LEDS_COUNT * sizeof(UNIT_LINE*));
+        leds = (Unit *)malloc(LEDS_COUNT * sizeof(Unit));
 
         if (leds == NULL) {
             printe(1200, "LED init", SEVERE);
@@ -46,11 +48,11 @@ UNIT_LINE** leds_gen()
 // release resource
 void leds_free()
 {
-    UNIT_LINE **leds = leds_gen();
+    Unit *leds = leds_gen();
 
     for (int i = 0; i < LEDS_COUNT; i++) {
-        gpiod_line_set_value(leds[i], 0);
-        gpiod_line_release(leds[i]);
+        gpiod_line_set_value(leds[i].call, 0);
+        gpiod_line_release(leds[i].call);
     }
 
     free(leds);

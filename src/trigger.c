@@ -11,21 +11,21 @@
 // trigger different actions depending on button pressed
 void call_action(short status, bool *shift, const uint *count)
 {
-    UNIT_LINE **leds = leds_gen();
+    Unit *leds = leds_gen();
 
     status = (status * 10) + *shift;
     switch (status) {
         // ======== toggle shift ======== //
         case 10: // shift off
             *shift = true;
-            gpiod_line_set_value(leds[2], 1);
+            gpiod_line_set_value(leds[2].call, 1);
             break;
 
         case 11: // shift on
             *shift = false;
-            gpiod_line_set_value(leds[2], 0);
+            gpiod_line_set_value(leds[2].call, 0);
             break;
-        
+
         // ========== button 1 ========== //
         case 100: // shift off
             printf("button 1 shift off\n");
@@ -98,10 +98,10 @@ void call_action(short status, bool *shift, const uint *count)
 // automate these commands within certain time duration
 void auto_action(const uint *counter)
 {
-    UNIT_LINE **leds = leds_gen();
+    Unit *leds = leds_gen();
 
-    if (*counter == 0) {
-        gpiod_line_set_value(leds[0], power_stable());
+    if (*counter == 1) {
+        gpiod_line_set_value(leds[0].call, power_stable());
     }
 }
 
@@ -110,7 +110,7 @@ void warn_indicate(uint *counter)
     //
 }
 
-void notify_indicate( uint *counter)
+void notify_indicate(uint *counter)
 {
     //
 }
@@ -120,14 +120,16 @@ void alarm_indicate(uint *counter)
     //
 }
 
+// confirm that the end button has not been pressed
 bool keep_running()
 {
-    Button *buttons = buttons_gen();
+    Unit *buttons = buttons_gen();
     return !gpiod_line_get_value(buttons[0].call);
 }
 
 // increment counter with time (seconds)
 void counter_update(uint *counter)
 {
-    *counter = (*counter + 1) * (*counter != UINT_MAX);
+    // counter resets to 1 when it reaches its max value
+    *counter = 1 + (*counter * (*counter != UINT_MAX));
 }

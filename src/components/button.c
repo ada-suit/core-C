@@ -4,7 +4,7 @@
 #define BUTTONS_COUNT 5
 
 // initialise button array with Button input lines
-void buttons_init(Button *buttons)
+void buttons_init(Unit *buttons)
 {
     const Port list[] = {
         {"cease"  , 25}, // 0  terminate the program
@@ -27,13 +27,13 @@ void buttons_init(Button *buttons)
     }
 }
 
-Button* buttons_gen()
+Unit* buttons_gen()
 {
     static bool generate = true;
-    static Button *buttons;
+    static Unit *buttons;
 
     if (generate) {
-        buttons = (Button *)malloc(BUTTONS_COUNT * sizeof(Button));
+        buttons = (Unit *)malloc(BUTTONS_COUNT * sizeof(Unit));
 
         if (buttons == NULL) {
             printe(1200, "LED init", SEVERE);
@@ -49,7 +49,7 @@ Button* buttons_gen()
 // check if a button has been pressed
 short buttons_update(const uint *counter)
 {
-    Button *buttons = buttons_gen();
+    Unit *buttons = buttons_gen();
     short condition = 0;
 
     for (int i = 1; i < BUTTONS_COUNT; i++) {
@@ -78,7 +78,7 @@ short buttons_update(const uint *counter)
 // release resource
 void buttons_free()
 {
-    Button *buttons = buttons_gen();
+    Unit *buttons = buttons_gen();
 
     for (int i = 0; i < BUTTONS_COUNT; i++) {
         gpiod_line_release(buttons[i].call);

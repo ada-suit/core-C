@@ -15,7 +15,13 @@ typedef struct {
     int pin;
 } Port;
 
+typedef struct {
+    struct gpiod_line *call;
+    uint sleep;
+} Unit;
+
 typedef unsigned int uint;
+typedef __uint8_t uintb; // one byte unsigned int
 typedef struct gpiod_line UNIT_LINE;
 typedef struct gpiod_chip UNIT_CHIP;
 

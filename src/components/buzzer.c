@@ -4,29 +4,33 @@
 #define BUZZERS_COUNT 1
 
 // initialise Buzzer array with Buzzer output lines
-void buzzers_init(UNIT_LINE *buzzers[])
+void buzzers_init(Unit *buzzers)
 {
     const Port list[] = {
         {"all"    , 13}  // only buzzer I am using; used for all purpose
+        // ...add more buzzers here
     };
 
     UNIT_CHIP *chip = chip_gen();
 
     for (int i = 0; i < BUZZERS_COUNT; i++) {
-        const int status = line_init(&buzzers[i], chip, list[i], OUTPUT);
+        buzzers[i].sleep = 0;
+
+        const int status = line_init(&buzzers[i].call, chip, list[i], OUTPUT);
         if (status != 0) {
             printe(status, "Buzzer init", SEVERE);
         }
     }
 }
 
-UNIT_LINE** buzzers_gen()
+// generate buzzers list
+Unit* buzzers_gen()
 {
     static bool generate = true;
-    static UNIT_LINE **buzzers;
+    static Unit *buzzers;
 
     if (generate) {
-        buzzers = (UNIT_LINE **)malloc(BUZZERS_COUNT * sizeof(UNIT_LINE*));
+        buzzers = (Unit *)malloc(BUZZERS_COUNT * sizeof(Unit));
 
         if (buzzers == NULL) {
             printe(1200, "Buzzer init", SEVERE);
@@ -41,10 +45,11 @@ UNIT_LINE** buzzers_gen()
 
 void buzzers_free()
 {
-    UNIT_LINE **buzzers = buzzers_gen();
+    Unit *buzzers = buzzers_gen();
 
     for (int i = 0; i < BUZZERS_COUNT; i++) {
-        gpiod_line_release(buzzers[i]);
+        gpiod_line_set_value(buzzers[i].call, 0);
+        gpiod_line_release(buzzers[i].call);
     }
 
     free(buzzers);
