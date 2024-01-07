@@ -45,6 +45,19 @@ Unit* leds_gen()
     return leds;
 }
 
+// update leds state to turn them off if required
+void leds_update(const uint *counter)
+{
+    Unit *leds = leds_gen();
+
+    for (int i = 1; i < LEDS_COUNT; i++) {
+        if (leds[i].sleep == *counter) {
+            leds[i].sleep = 0;
+            gpiod_line_set_value(leds[i].call, 0);
+        }
+    }
+}
+
 // release resource
 void leds_free()
 {

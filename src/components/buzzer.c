@@ -43,6 +43,19 @@ Unit* buzzers_gen()
     return buzzers;
 }
 
+// update buzzers state to turn them off if required
+void buzzers_update(const uint *counter) {
+    Unit *buzzers = buzzers_gen();
+
+    for (int i = 1; i < BUZZERS_COUNT; i++) {
+        if (buzzers[i].sleep == *counter) {
+            buzzers[i].sleep = 0;
+            gpiod_line_set_value(buzzers[i].call, 0);
+        }
+    }
+}
+
+// release resources
 void buzzers_free()
 {
     Unit *buzzers = buzzers_gen();

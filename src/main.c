@@ -18,11 +18,13 @@ int main()
 
     // main loop; runs forever unless requested to not run
     while (run) {
-        // update the counter
+        // update
         counter_update(&counter);
+        leds_update(&counter);
+        buzzers_update(&counter);
+        const short status = buttons_update(&counter);
 
         // trigger actions
-        const short status = buttons_update(&counter);
         call_action(status, &button_shift, &counter);
         auto_action(&counter);
 
