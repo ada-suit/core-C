@@ -12,7 +12,7 @@ SRC_FILES := $(wildcard $(SRC_DIR)/*.c) $(wildcard $(COMPONENTS_DIR)/*.c)
 OBJ_FILES := $(SRC_FILES:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 DEP_FILES := $(OBJ_FILES:.o=.d)
 
-CROSS_CFLAGS = -Wall -O2 -march=armv8-a
+CROSS_CFLAGS = -Wall -O2 -march=armv8-a -static 
 INCLUDES = -I$(COMPONENTS_DIR)
 
 .PHONY: all self cross clean
