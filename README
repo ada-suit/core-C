@@ -1,0 +1,9 @@
+Core-C
+============
+
+The coreC repository is a historical artifact showcasing the initial backbone of
+the A.D.A. project. This repository contains code written in C, serving as an
+alternative implementation to the Rust-based core repository. While it is no
+longer actively maintained, it provides insights into an earlier approach to the
+project.
+
